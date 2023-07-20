@@ -17,9 +17,8 @@
 
      oral_peri <- append(attachment, feeding)
      oral_peri <- append(oral_peri, repro)
-     oral_peri <- append(oral_peri, oral_plate)
-     oral_peri <- append(oral_peri, attachment)
-     oral_peri <- append(oral_peri, peri)  
+     oral_peri <- append(oral_peri, resp)
+     oral_peri <- append(oral_peri, thecal)
      morpho_oral_peri <- morpho  
      morpho_oral_peri.excludeCharacter(oral_peri)     
       for (i in 1:n_max_states) {
@@ -49,7 +48,7 @@
      }
 
 
-     oral_platelet <- append(resp, thecal)
+     oral_platelet <- append(oral, peri)
      morpho_oral_platelet <- morpho  
      morpho_oral_platelet.excludeCharacter(oral_platelet) 
          morpho_oral_platelet

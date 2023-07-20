@@ -1,5 +1,7 @@
 
 
+
+
     n_max_states <- 7
 
      idx = 1
@@ -12,10 +14,13 @@
      resp <- v(28,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76)
      thecal <- v(44,15,79,80)
 
-     oral_feeding <- append(attachment, peri)
+
+
+     oral_feeding <- append(feeding, attachment)
      oral_feeding <- append(oral_feeding, repro)
-     oral_feeding <- append(oral_feeding, resp)
-     oral_feeding <- append(oral_feeding, thecal)  
+     oral_feeding <- append(oral_feeding, oral_plate)
+     oral_feeding <- append(oral_feeding, peri)  
+
      morpho_feeding <- morpho  
      morpho_feeding.excludeCharacter(oral_feeding)     
       for (i in 1:n_max_states) {
@@ -45,7 +50,7 @@
      }
 
 
-     oral_platelet <- append(oral_plate, feeding)
+     oral_platelet <- append(resp, thecal)
      morpho_oral_platelet <- morpho  
      morpho_oral_platelet.excludeCharacter(oral_platelet) 
          morpho_oral_platelet
