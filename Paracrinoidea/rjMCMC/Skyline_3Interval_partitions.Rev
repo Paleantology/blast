@@ -46,7 +46,7 @@ monitors = VectorMonitors()
       rho <- 0;	# 'extant' sampling.
 
      # Establish Basal Divergence Time
-     origin_time ~ dnUnif(460, 520);
+     origin_time ~ dnUnif(440, 520);
      moves.append(mvSlide(origin_time, delta=0.01, weight=5));
      moves.append(mvSlide(origin_time, delta=0.10, weight=3));
      moves.append(mvSlide(origin_time, delta=1.00, weight=1));
@@ -143,22 +143,22 @@ source("rjMCMC/model_Mk_Oral_Peri.Rev")
 
 
 
-     monitors.append(mnModel(filename="output/parted.log", printgen=10))
+     monitors.append(mnModel(filename="output/parted.log", printgen=100))
 
 
 
-     monitors.append(mnFile(filename="output/parted.trees", printgen=10,  fbd_tree))
+     monitors.append(mnFile(filename="output/parted.trees", printgen=100,  fbd_tree))
 
 
 
-     monitors.append(mnScreen(printgen=10, num_samp_anc, origin_time, character_indicator))
+     monitors.append(mnScreen(printgen=100, num_samp_anc, origin_time, character_indicator))
 
 
 
-     mymcmc = mcmc(mymodel, monitors, moves)
+     mymcmc = mcmc(mymodel, monitors, moves, nrun=2)
 
 
-     mymcmc.run(generations=1000000)
+     mymcmc.run(generations=10000000)
 
 
 
