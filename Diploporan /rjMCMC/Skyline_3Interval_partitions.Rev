@@ -113,7 +113,7 @@ monitors = VectorMonitors()
      moves.append( mvScale(clock_morpho, lambda=1,    weight=4.0) )
 
 
-character_indicator ~ dnCategorical(simplex(1,1,1,1));
+character_indicator ~ dnCategorical(simplex(1,1,1,1, 1));
 character_indicator.setValue(2);
 moves.append( mvRandomGeometricWalk(character_indicator, weight=10.0, tune=FALSE) );
 
@@ -125,15 +125,18 @@ moves.append(mvScale(alpha_morpho, lambda=1, weight=2.0))
 
 rates_morpho_all_part := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
 rates_morpho_oral_plate := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
+rates_morpho_oral_peri := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
 rates_morpho_resp_theca := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
 
-char_vec := v(rates_morpho, rates_morpho_resp_theca, rates_morpho_oral_plate, rates_morpho_all_part );
+char_vec := v(rates_morpho, rates_morpho_resp_theca, rates_morpho_oral_plate, rates_morpho_oral_peri, rates_morpho_all_part );
 site_rates := char_vec[character_indicator]
 
 source("rjMCMC/model_Mk.Rev")
 source("rjMCMC/model_Mk_FullPartition.Rev")
 source("rjMCMC/model_Mk_oral_plate_feeding.Rev")
 source("rjMCMC/model_Mk_Oral_Peri.Rev")
+source("rjMCMC/model_Mk_resp_theca.Rev")
+
 
 
 
