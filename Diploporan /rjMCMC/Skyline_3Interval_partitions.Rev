@@ -146,11 +146,11 @@ source("rjMCMC/model_Mk_resp_theca.Rev")
 
 
 
-     monitors.append(mnModel(filename="output/parted.log", printgen=10))
+     monitors.append(mnModel(filename="output/all_part.log", printgen=10))
 
 
 
-     monitors.append(mnFile(filename="output/parted.trees", printgen=10,  fbd_tree))
+     monitors.append(mnFile(filename="output/all_part.trees", printgen=10,  fbd_tree))
 
 
 

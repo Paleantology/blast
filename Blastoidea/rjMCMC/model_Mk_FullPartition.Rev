@@ -19,12 +19,12 @@
      nonfeeding <- append(nonfeeding, peri)
      nonfeeding <- append(nonfeeding, repro)
      nonfeeding <- append(nonfeeding, resp)
-     nonfeeding <- append(nonfeeding, thecal)  
-     morpho_nonfeeding <- morpho  
-     morpho_nonfeeding.excludeCharacter(nonfeeding)     
+     nonfeeding <- append(nonfeeding, thecal)
+     morpho_nonfeeding <- morpho
+     morpho_nonfeeding.excludeCharacter(nonfeeding)
      morpho_nonfeeding
       for (i in 1:n_max_states) {
-        morpho_feeding_bystate[i] <- morpho_nonfeeding  
+        morpho_feeding_bystate[i] <- morpho_nonfeeding
         morpho_feeding_bystate[i].setNumStatesPartition(i)
          nc = morpho_feeding_bystate[i].nchar()
          # for non-empty character blocks
@@ -54,12 +54,12 @@
      oral_platelet <- append(oral_platelet, peri)
      oral_platelet <- append(oral_platelet, repro)
      oral_platelet <- append(oral_platelet, resp)
-     oral_platelet <- append(oral_platelet, thecal) 
-     morpho_oral_platelet <- morpho  
-     morpho_oral_platelet.excludeCharacter(oral_platelet) 
+     oral_platelet <- append(oral_platelet, thecal)
+     morpho_oral_platelet <- morpho
+     morpho_oral_platelet.excludeCharacter(oral_platelet)
          morpho_oral_platelet
       for (i in 1:n_max_states) {
-        morpho_oral_platelet_bystate[i] <- morpho_oral_platelet  
+        morpho_oral_platelet_bystate[i] <- morpho_oral_platelet
         morpho_oral_platelet_bystate[i].setNumStatesPartition(i)
          nc = morpho_oral_platelet_bystate[i].nchar()
          # for non-empty character blocks
@@ -89,13 +89,13 @@
      nonattach <- append(nonattach, peri)
      nonattach <- append(nonattach, repro)
      nonattach  <- append(nonattach, resp)
-     nonattach <- append(nonattach, thecal) 
+     nonattach <- append(nonattach, thecal)
 
-     morpho_nonattach <- morpho  
-     morpho_nonattach.excludeCharacter(nonattach)     
+     morpho_nonattach <- morpho
+     morpho_nonattach.excludeCharacter(nonattach)
      morpho_nonattach
       for (i in 1:n_max_states) {
-        morpho_nonattach_bystate[i] <- morpho_nonattach 
+        morpho_nonattach_bystate[i] <- morpho_nonattach
         morpho_nonattach_bystate[i].setNumStatesPartition(i)
          nc = morpho_nonattach_bystate[i].nchar()
          # for non-empty character blocks
@@ -125,12 +125,12 @@
      periproct <- append(periproct, attachment)
      periproct <- append(periproct, repro)
      periproct  <- append(periproct, resp)
-     periproct <- append(periproct, thecal) 
-     morpho_periproct <- morpho  
-     morpho_periproct.excludeCharacter(periproct)  
-     morpho_periproct   
+     periproct <- append(periproct, thecal)
+     morpho_periproct <- morpho
+     morpho_periproct.excludeCharacter(periproct)
+     morpho_periproct
       for (i in 1:n_max_states) {
-        morpho_periproct_bystate[i] <- morpho_periproct 
+        morpho_periproct_bystate[i] <- morpho_periproct
         morpho_periproct_bystate[i].setNumStatesPartition(i)
          nc = morpho_periproct_bystate[i].nchar()
          # for non-empty character blocks
@@ -158,12 +158,12 @@
      repro <- append(repro, peri)
      repro <- append(repro, attachment)
      repro  <- append(repro, resp)
-     repro <- append(repro, thecal) 
-     morpho_repro <- morpho  
-     morpho_repro.excludeCharacter(repro)     
+     repro <- append(repro, thecal)
+     morpho_repro <- morpho
+     morpho_repro.excludeCharacter(repro)
      morpho_repro
       for (i in 1:n_max_states) {
-        morpho_repro_bystate[i] <-  morpho_repro  
+        morpho_repro_bystate[i] <-  morpho_repro
         morpho_repro_bystate[i].setNumStatesPartition(i)
          nc = morpho_repro_bystate[i].nchar()
          # for non-empty character blocks
@@ -191,12 +191,12 @@
      respire <- append(respire, peri)
      respire <- append(respire, repro)
      respire  <- append(respire, attachment)
-     respire <- append(respire, thecal) 
-     morpho_respire <- morpho  
-     morpho_respire.excludeCharacter(respire)     
+     respire <- append(respire, thecal)
+     morpho_respire <- morpho
+     morpho_respire.excludeCharacter(respire)
      morpho_respire
       for (i in 1:n_max_states) {
-        morpho_respire_bystate[i] <- morpho_respire  
+        morpho_respire_bystate[i] <- morpho_respire
         morpho_respire_bystate[i].setNumStatesPartition(i)
          nc = morpho_respire_bystate[i].nchar()
          # for non-empty character blocks
@@ -224,12 +224,12 @@
      thecal <- append(thecal, peri)
      thecal <- append(thecal, repro)
      thecal <- append(thecal, attachment)
-     thecal <- append(thecal, resp) 
-     morpho_thecal  <- morpho  
-     morpho_thecal.excludeCharacter(thecal) 
-     morpho_thecal    
+     thecal <- append(thecal, resp)
+     morpho_thecal  <- morpho
+     morpho_thecal.excludeCharacter(thecal)
+     morpho_thecal
       for (i in 1:n_max_states) {
-        morpho_thecal_bystate[i] <- morpho_thecal  
+        morpho_thecal_bystate[i] <- morpho_thecal
         morpho_thecal_bystate[i].setNumStatesPartition(i)
          nc = morpho_thecal_bystate[i].nchar()
          # for non-empty character blocks

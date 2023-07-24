@@ -125,7 +125,7 @@ moves.append(mvScale(alpha_morpho, lambda=1, weight=2.0))
 
 rates_morpho_all_part := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
 rates_morpho_oral_plate := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
-rates_morpho_resp_theca := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
+rates_morpho_oral_peri := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
 rates_morpho_resp_theca := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
 
 char_vec := v(rates_morpho, rates_morpho_resp_theca, rates_morpho_oral_plate, rates_morpho_oral_peri, rates_morpho_all_part );
@@ -145,11 +145,11 @@ source("rjMCMC/model_Mk_resp_thecal.Rev")
 
 
 
-     monitors.append(mnModel(filename="output/parted.log", printgen=100))
+     monitors.append(mnModel(filename="output/all_part.log", printgen=100))
 
 
 
-     monitors.append(mnFile(filename="output/parted.trees", printgen=100,  fbd_tree))
+     monitors.append(mnFile(filename="output/all_part.trees", printgen=100,  fbd_tree))
 
 
 

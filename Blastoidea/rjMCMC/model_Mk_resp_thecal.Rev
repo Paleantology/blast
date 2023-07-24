@@ -2,6 +2,7 @@
 
 
 
+
     n_max_states <- 7
 
      idx = 1
@@ -14,17 +15,16 @@
      resp <- v(28,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76)
      thecal <- v(44,15,79,80)
 
-
-
-     oral_feeding <- append(feeding, attachment)
-     oral_feeding <- append(oral_feeding, repro)
-     oral_feeding <- append(oral_feeding, oral_plate)
-     oral_feeding <- append(oral_feeding, peri)  
-
-     morpho_feeding <- morpho  
-     morpho_feeding.excludeCharacter(oral_feeding)     
+     nonfeeding <- append(attachment, oral_plate)
+     nonfeeding <- append(nonfeeding, peri)
+     nonfeeding <- append(nonfeeding, repro)
+     nonfeeding <- append(nonfeeding, resp)
+     nonfeeding <- append(nonfeeding, thecal)
+     morpho_nonfeeding <- morpho
+     morpho_nonfeeding.excludeCharacter(nonfeeding)
+     morpho_nonfeeding
       for (i in 1:n_max_states) {
-        morpho_feeding_bystate[i] <- morpho_feeding  
+        morpho_feeding_bystate[i] <- morpho_nonfeeding
         morpho_feeding_bystate[i].setNumStatesPartition(i)
          nc = morpho_feeding_bystate[i].nchar()
          # for non-empty character blocks
@@ -50,12 +50,16 @@
      }
 
 
-     oral_platelet <- append(resp, thecal)
-     morpho_oral_platelet <- morpho  
-     morpho_oral_platelet.excludeCharacter(oral_platelet) 
+     oral_platelet <- append(attachment, feeding)
+     oral_platelet <- append(oral_platelet, peri)
+     oral_platelet <- append(oral_platelet, repro)
+     oral_platelet <- append(oral_platelet, resp)
+     oral_platelet <- append(oral_platelet, thecal)
+     morpho_oral_platelet <- morpho
+     morpho_oral_platelet.excludeCharacter(oral_platelet)
          morpho_oral_platelet
       for (i in 1:n_max_states) {
-        morpho_oral_platelet_bystate[i] <- morpho_oral_platelet  
+        morpho_oral_platelet_bystate[i] <- morpho_oral_platelet
         morpho_oral_platelet_bystate[i].setNumStatesPartition(i)
          nc = morpho_oral_platelet_bystate[i].nchar()
          # for non-empty character blocks
@@ -79,4 +83,138 @@
      }
      }
 
-m_morph
+
+
+     nonattach <- append(oral_plate, feeding)
+     nonattach <- append(nonattach, peri)
+     nonattach <- append(nonattach, repro)
+     nonattach  <- append(nonattach, resp)
+     nonattach <- append(nonattach, thecal)
+
+     morpho_nonattach <- morpho
+     morpho_nonattach.excludeCharacter(nonattach)
+     morpho_nonattach
+      for (i in 1:n_max_states) {
+        morpho_nonattach_bystate[i] <- morpho_nonattach
+        morpho_nonattach_bystate[i].setNumStatesPartition(i)
+         nc = morpho_nonattach_bystate[i].nchar()
+         # for non-empty character blocks
+         if (nc > 0) {
+             # make i-by-i rate matrix
+             q[idx] <- fnJC(i)
+     # create model of evolution for the character block
+             m_morph[idx] ~ dnPhyloCTMC( tree=fbd_tree,
+                                         Q=q[idx],
+                                         nSites=nc,
+                                         siteRates=site_rates,
+                                         branchRates=clock_morpho,
+                                         type="Standard")
+
+             # attach the data
+     	    m_morph[idx].clamp(morpho_nonattach_bystate[i])
+
+             # increment counter
+             idx = idx + 1
+     idx
+     }
+     }
+
+
+
+     periproct <- append(oral_platelet, feeding)
+     periproct <- append(periproct, attachment)
+     periproct <- append(periproct, repro)
+     periproct  <- append(periproct, resp)
+     periproct <- append(periproct, thecal)
+     morpho_periproct <- morpho
+     morpho_periproct.excludeCharacter(periproct)
+     morpho_periproct
+      for (i in 1:n_max_states) {
+        morpho_periproct_bystate[i] <- morpho_periproct
+        morpho_periproct_bystate[i].setNumStatesPartition(i)
+         nc = morpho_periproct_bystate[i].nchar()
+         # for non-empty character blocks
+         if (nc > 0) {
+             # make i-by-i rate matrix
+             q[idx] <- fnJC(i)
+     # create model of evolution for the character block
+             m_morph[idx] ~ dnPhyloCTMC( tree=fbd_tree,
+                                         Q=q[idx],
+                                         nSites=nc,
+                                         siteRates=site_rates,
+                                         branchRates=clock_morpho,
+                                         type="Standard")
+
+             # attach the data
+     	    m_morph[idx].clamp(morpho_periproct_bystate[i])
+
+             # increment counter
+             idx = idx + 1
+     idx
+     }
+     }
+
+     repro <- append(oral_plate, feeding)
+     repro <- append(repro, peri)
+     repro <- append(repro, attachment)
+     repro  <- append(repro, resp)
+     repro <- append(repro, thecal)
+     morpho_repro <- morpho
+     morpho_repro.excludeCharacter(repro)
+     morpho_repro
+      for (i in 1:n_max_states) {
+        morpho_repro_bystate[i] <-  morpho_repro
+        morpho_repro_bystate[i].setNumStatesPartition(i)
+         nc = morpho_repro_bystate[i].nchar()
+         # for non-empty character blocks
+         if (nc > 0) {
+             # make i-by-i rate matrix
+             q[idx] <- fnJC(i)
+     # create model of evolution for the character block
+             m_morph[idx] ~ dnPhyloCTMC( tree=fbd_tree,
+                                         Q=q[idx],
+                                         nSites=nc,
+                                         siteRates=site_rates,
+                                         branchRates=clock_morpho,
+                                         type="Standard")
+
+             # attach the data
+     	    m_morph[idx].clamp(morpho_repro_bystate[i])
+
+             # increment counter
+             idx = idx + 1
+     idx
+     }
+     }
+
+     respire <- append(oral_plate, feeding)
+     respire <- append(respire, peri)
+     respire <- append(respire, repro)
+     respire  <- append(respire, attachment)
+     morpho_respire <- morpho
+     morpho_respire.excludeCharacter(respire)
+     morpho_respire
+      for (i in 1:n_max_states) {
+        morpho_respire_bystate[i] <- morpho_respire
+        morpho_respire_bystate[i].setNumStatesPartition(i)
+         nc = morpho_respire_bystate[i].nchar()
+         # for non-empty character blocks
+         if (nc > 0) {
+             # make i-by-i rate matrix
+             q[idx] <- fnJC(i)
+     # create model of evolution for the character block
+             m_morph[idx] ~ dnPhyloCTMC( tree=fbd_tree,
+                                         Q=q[idx],
+                                         nSites=nc,
+                                         siteRates=site_rates,
+                                         branchRates=clock_morpho,
+                                         type="Standard")
+
+             # attach the data
+     	    m_morph[idx].clamp(morpho_respire_bystate[i])
+
+             # increment counter
+             idx = idx + 1
+     idx
+     }
+     }
