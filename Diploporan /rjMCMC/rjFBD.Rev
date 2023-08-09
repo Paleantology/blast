@@ -1,0 +1,134 @@
+
+taxa <- readTaxonData("data/ages.tsv", separator = ",")
+taxa
+morpho <- readDiscreteCharacterData("data/matrix_only.nex")
+morpho.addMissingTaxa(taxa)
+moves = VectorMoves()
+monitors = VectorMonitors()
+
+ n_taxa <- taxa.size()
+
+ num_branches <- 2 * n_taxa - 2
+
+timeline <- v(520); 
+timeline1 <- v(264.28, 359.3, 443.8);  # Shift at each substage
+timeline2 <- v(90.70, 102.50, 174.45, 176.60);  # Two punctuation
+timeline3 <- v(174.45, 176.60);  # One punctuation
+timeline4 <- v(443.8, 445.2 );  # One shift
+
+
+
+fbd_indicator ~ dnCategorical(simplex(1,1,1,1,1));
+fbd_indicator.setValue(3);
+moves.append( mvRandomGeometricWalk(fbd_indicator, weight=10.0, tune=FALSE) );
+fbd_vec := v(timeline, timeline1, timeline2, timeline3, timeline4);
+times := fbd_vec[fbd_indicator]
+times.size()
+source("rjMCMC/model_FBD.Rev")
+
+fbd_dist = dnFBDP(originAge=origin_time, lambda=speciation_rate, mu=extinction_rate, psi=psi, rho=rho, timeline=times, taxa=taxa, condition="sampling")
+
+fbd_tree ~ dnConstrainedTopology(fbd_dist)
+
+
+moves.append(mvFNPR(fbd_tree, weight=15.0))
+
+moves.append(mvCollapseExpandFossilBranch(fbd_tree, origin_time, weight=6.0))
+
+moves.append(mvNodeTimeSlideUniform(fbd_tree, weight=40.0))
+
+moves.append(mvRootTimeSlideUniform(fbd_tree, origin_time, weight=5.0))
+
+
+
+ # Setup the fossil tip sampling #
+
+ # Use a for loop to create a uniform distribution on the occurence time for each fossil #
+
+ # The boundaries of the uniform distribution are specified in the tsv file #
+
+ fossils = fbd_tree.getFossils()
+ for(i in 1:fossils.size())
+{
+    fossils[i]
+    t[i] := tmrca(fbd_tree, clade(fossils[i]))
+    print("t")
+    t[i]
+    a_i = fossils[i].getMinAge()
+    print("a")
+    a_i
+    b_i = fossils[i].getMaxAge()
+    print("b")
+    b_i
+    F[i] ~ dnUniform(t[i] - b_i, t[i] - a_i)
+        print("F")
+    F[i]
+ #   F[i].clamp( 0 )
+}
+
+ # Add a move to sample the fossil times #
+ moves.append( mvFossilTimeSlideUniform(fbd_tree, origin_time, weight=5.0) )
+
+
+num_samp_anc := fbd_tree.numSampledAncestors()
+
+
+clock_morpho ~ dnExponential(1.0)
+moves.append( mvScale(clock_morpho, lambda=0.01, weight=4.0) )
+moves.append( mvScale(clock_morpho, lambda=0.1,  weight=4.0) )
+moves.append( mvScale(clock_morpho, lambda=1,    weight=4.0) )
+
+
+character_indicator ~ dnCategorical(simplex(1,1,1,1, 1));
+character_indicator.setValue(5);
+moves.append( mvRandomGeometricWalk(character_indicator, weight=10.0, tune=FALSE) );
+
+
+alpha_morpho ~ dnUniform( 0, 1E6 )
+rates_morpho := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
+#Moves on the parameters of the Gamma distribution.
+moves.append(mvScale(alpha_morpho, lambda=1, weight=2.0))
+
+rates_morpho_all_part := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
+rates_morpho_oral_plate := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
+rates_morpho_oral_peri := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
+rates_morpho_resp_theca := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
+
+char_vec := v(rates_morpho, rates_morpho_resp_theca, rates_morpho_oral_plate, rates_morpho_oral_peri, rates_morpho_all_part );
+site_rates := char_vec[character_indicator]
+
+source("rjMCMC/model_Mk.Rev")
+source("rjMCMC/model_Mk_FullPartition.Rev")
+source("rjMCMC/model_Mk_oral_plate_feeding.Rev")
+source("rjMCMC/model_Mk_Oral_Peri.Rev")
+source("rjMCMC/model_Mk_resp_theca.Rev")
+
+
+
+
+
+
+     mymodel = model(fbd_tree)
+
+
+
+     monitors.append(mnModel(filename="output/fbd_jump.log", printgen=10, exclude = v("F", "times")))
+
+
+
+     monitors.append(mnFile(filename="output/fbd_jump.trees", printgen=10,  fbd_tree))
+
+
+
+     monitors.append(mnScreen(printgen=10, num_samp_anc, origin_time, character_indicator))
+
+
+
+     mymcmc = mcmc(mymodel, monitors, moves)
+
+
+     mymcmc.run(generations=1000000)
+
+
+
+     q()
