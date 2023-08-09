@@ -10,67 +10,33 @@ monitors = VectorMonitors()
 
      num_branches <- 2 * n_taxa - 2
 
+timeline <- v(174.45, 176.60);  # One punctuation
+timeline1 <- v(90.70, 102.50, 174.45, 176.60);  #Shift at each substage, two punctuations
+timeline2 <- v(0.6, 102.5, 176.6);  # Shift at each substage
+timeline3 <- v(443.8, 445.2 );  # Two-stage
+timeline4 <- v(90.7,0.6, 102.5,174.45,176.6);  # Shift at each substage, one punc
 
 
-#     timeline <- v(.5, 4.5, 9)
-      timeline <- v(299, 359, 416, 444);
-      # Diversification Rates based on Echinodermata
-      speciation_rate ~ dnExponential(1.471);
-      # NOTE: If it gets stuck in this script, then set origination & extinction to 1.0
-      moves.append(mvScale(speciation_rate, lambda=0.01, weight=5));
-      moves.append(mvScale(speciation_rate, lambda=0.10, weight=3));
-      moves.append(mvScale(speciation_rate, lambda=1.00, weight=1));
+fbd_indicator ~ dnCategorical(simplex(1,1,1,1,1));
+fbd_indicator.setValue(3);
+moves.append( mvRandomGeometricWalk(fbd_indicator, weight=10.0, tune=FALSE) );
+fbd_vec := v(timeline, timeline1, timeline2, timeline3, timeline4);
+times := fbd_vec[fbd_indicator]
+times.size()
+source("rjMCMC/model_FBD.Rev")
 
-      turnover ~ dnUnif(0.9, 1.05);
-      moves.append(mvSlide(turnover, delta=0.01, weight=5));
-      moves.append(mvSlide(turnover, delta=0.10, weight=3));
-      moves.append(mvSlide(turnover, delta=1.00, weight=1));
-      extinction_rate := turnover*speciation_rate;
-      diversification := speciation_rate - extinction_rate;
+fbd_dist = dnFBDP(originAge=origin_time, lambda=speciation_rate, mu=extinction_rate, psi=psi, rho=rho, timeline=times, taxa=taxa, condition="sampling")
 
-      # old extinction stuff. We should not use this, as extinction should not be independent of origination!
-      #extinction_rate ~ dnExponential(1.471);
-      #moves.append(mvScale(extinction_rate, lambda=0.01, weight=5));
-      #moves.append(mvScale(extinction_rate, lambda=0.10, weight=3));
-      #moves.append(mvScale(extinction_rate, lambda=1.00, weight=1));
-      #turnover := extinction_rate/speciation_rate;
-
-      # Fossil Sampling Rates based on collection occupied by Echinodermata
-      psi ~ dnExponential(3.892);
-      completeness := psi/(extinction_rate+psi);
-      moves.append(mvScale(psi, lambda=0.01, weight=5));
-      moves.append(mvScale(psi, lambda=0.10, weight=3));
-      moves.append(mvScale(psi, lambda=1.00, weight=1));
-
-      # Proportional Taxon Sampling of Youngest Time Slice
-      rho <- 0;	# 'extant' sampling.
-
-     # Establish Basal Divergence Time
-     origin_time ~ dnUnif(440, 520);
-     moves.append(mvSlide(origin_time, delta=0.01, weight=5));
-     moves.append(mvSlide(origin_time, delta=0.10, weight=3));
-     moves.append(mvSlide(origin_time, delta=1.00, weight=1));
+fbd_tree ~ dnConstrainedTopology(fbd_dist)
 
 
-     fbd_dist = dnFBDP(originAge=origin_time, lambda=speciation_rate, mu=extinction_rate, psi=psi, rho=rho, timeline=timeline, taxa=taxa, condition="sampling")
+moves.append(mvFNPR(fbd_tree, weight=15.0))
 
+moves.append(mvCollapseExpandFossilBranch(fbd_tree, origin_time, weight=6.0))
 
+moves.append(mvNodeTimeSlideUniform(fbd_tree, weight=40.0))
 
-  #   outgroup = clade("Cheirocystis_fultonensis");
-
- #constraints = v(outgroup)
-
-
-     fbd_tree ~ dnConstrainedTopology(fbd_dist)
-
-
-     moves.append(mvFNPR(fbd_tree, weight=15.0))
-
-     moves.append(mvCollapseExpandFossilBranch(fbd_tree, origin_time, weight=6.0))
-
-     moves.append(mvNodeTimeSlideUniform(fbd_tree, weight=40.0))
-
-     moves.append(mvRootTimeSlideUniform(fbd_tree, origin_time, weight=5.0))
+moves.append(mvRootTimeSlideUniform(fbd_tree, origin_time, weight=5.0))
 
 
 
@@ -145,11 +111,11 @@ source("rjMCMC/model_Mk_resp_thecal.Rev")
 
 
 
-     monitors.append(mnModel(filename="output/all_part.log", printgen=100))
+     monitors.append(mnModel(filename="output/fbd_jump.log", printgen=100))
 
 
 
-     monitors.append(mnFile(filename="output/all_part.trees", printgen=100,  fbd_tree))
+     monitors.append(mnFile(filename="output/fbd_jump.trees", printgen=100,  fbd_tree))
 
 
 

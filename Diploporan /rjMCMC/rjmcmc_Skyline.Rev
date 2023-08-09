@@ -1,20 +1,22 @@
 
-taxa <- readTaxonData("data/blastoid_time.csv", separator = ",")
+taxa <- readTaxonData("data/ages.tsv", separator = ",")
 taxa
 morpho <- readDiscreteCharacterData("data/matrix_only.nex")
 morpho.addMissingTaxa(taxa)
 moves = VectorMoves()
 monitors = VectorMonitors()
 
-     n_taxa <- taxa.size()
+ n_taxa <- taxa.size()
 
-     num_branches <- 2 * n_taxa - 2
+ num_branches <- 2 * n_taxa - 2
 
 timeline <- v(520); 
 timeline1 <- v(264.28, 359.3, 443.8);  # Shift at each substage
 timeline2 <- v(90.70, 102.50, 174.45, 176.60);  # Two punctuation
 timeline3 <- v(174.45, 176.60);  # One punctuation
 timeline4 <- v(443.8, 445.2 );  # One shift
+
+
 
 fbd_indicator ~ dnCategorical(simplex(1,1,1,1,1));
 fbd_indicator.setValue(3);
@@ -29,20 +31,13 @@ fbd_dist = dnFBDP(originAge=origin_time, lambda=speciation_rate, mu=extinction_r
 fbd_tree ~ dnConstrainedTopology(fbd_dist)
 
 
+moves.append(mvFNPR(fbd_tree, weight=15.0))
 
+moves.append(mvCollapseExpandFossilBranch(fbd_tree, origin_time, weight=6.0))
 
-     fbd_tree ~ dnConstrainedTopology(fbd_dist)
+moves.append(mvNodeTimeSlideUniform(fbd_tree, weight=40.0))
 
-
-     moves.append(mvFNPR(fbd_tree, weight=15.0))
-
-     moves.append(mvCollapseExpandFossilBranch(fbd_tree, origin_time, weight=6.0))
-
-     moves.append(mvNodeTimeSlideUniform(fbd_tree, weight=40.0))
-
-     moves.append(mvRootTimeSlideUniform(fbd_tree, origin_time, weight=5.0))
-
-
+moves.append(mvRootTimeSlideUniform(fbd_tree, origin_time, weight=5.0))
 
 
 
@@ -75,18 +70,17 @@ fbd_tree ~ dnConstrainedTopology(fbd_dist)
  moves.append( mvFossilTimeSlideUniform(fbd_tree, origin_time, weight=5.0) )
 
 
-     num_samp_anc := fbd_tree.numSampledAncestors()
+num_samp_anc := fbd_tree.numSampledAncestors()
 
 
-     clock_morpho ~ dnExponential(1.0)
+clock_morpho ~ dnExponential(1.0)
+moves.append( mvScale(clock_morpho, lambda=0.01, weight=4.0) )
+moves.append( mvScale(clock_morpho, lambda=0.1,  weight=4.0) )
+moves.append( mvScale(clock_morpho, lambda=1,    weight=4.0) )
 
-     moves.append( mvScale(clock_morpho, lambda=0.01, weight=4.0) )
-     moves.append( mvScale(clock_morpho, lambda=0.1,  weight=4.0) )
-     moves.append( mvScale(clock_morpho, lambda=1,    weight=4.0) )
 
-
-character_indicator ~ dnCategorical(simplex(1,1,1,1,1));
-character_indicator.setValue(2);
+character_indicator ~ dnCategorical(simplex(1,1,1,1, 1));
+character_indicator.setValue(5);
 moves.append( mvRandomGeometricWalk(character_indicator, weight=10.0, tune=FALSE) );
 
 
@@ -107,7 +101,8 @@ source("rjMCMC/model_Mk.Rev")
 source("rjMCMC/model_Mk_FullPartition.Rev")
 source("rjMCMC/model_Mk_oral_plate_feeding.Rev")
 source("rjMCMC/model_Mk_Oral_Peri.Rev")
-source("rjMCMC/model_Mk_resp_thecal.Rev")
+source("rjMCMC/model_Mk_resp_theca.Rev")
+
 
 
 
@@ -117,22 +112,22 @@ source("rjMCMC/model_Mk_resp_thecal.Rev")
 
 
 
-     monitors.append(mnModel(filename="output/all_part.log", printgen=100))
+     monitors.append(mnModel(filename="output/fbd_jump.log", printgen=10, exclude = v("F", "times")))
 
 
 
-     monitors.append(mnFile(filename="output/all_part.trees", printgen=100,  fbd_tree))
+     monitors.append(mnFile(filename="output/fbd_jump.trees", printgen=10,  fbd_tree))
 
 
 
-     monitors.append(mnScreen(printgen=100, num_samp_anc, origin_time, character_indicator))
+     monitors.append(mnScreen(printgen=10, num_samp_anc, origin_time, character_indicator))
 
 
 
-     mymcmc = mcmc(mymodel, monitors, moves, nrun=2)
+     mymcmc = mcmc(mymodel, monitors, moves)
 
 
-     mymcmc.run(generations=100000000)
+     mymcmc.run(generations=1000000)
 
 
 

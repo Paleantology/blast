@@ -1,0 +1,30 @@
+
+for (i in 1:(times.size()+1))  {
+  speciation_rate[i] ~ dnExponential(1.471);
+  moves.append(mvScale(speciation_rate[i], lambda=0.01, weight=5));
+  moves.append(mvScale(speciation_rate[i], lambda=0.10, weight=3));
+  moves.append(mvScale(speciation_rate[i], lambda=1.00, weight=1));
+ # speciation_rate[i]
+  turnover[i] ~ dnLnorm(ln(0.945), 0.6564);       # dnUnif(0.9, 1.05);
+  moves.append(mvSlide(turnover[i], delta=0.01, weight=5));
+  moves.append(mvSlide(turnover[i], delta=0.10, weight=3));
+  moves.append(mvSlide(turnover[i], delta=1.00, weight=1));
+
+  extinction_rate[i] := turnover[i]*speciation_rate[i];
+  diversification[i] := speciation_rate[i] - extinction_rate[i];
+
+  psi[i] ~ dnExponential(3.892);
+  moves.append( mvScale(psi[i], lambda = 0.01) );
+  moves.append( mvScale(psi[i], lambda = 0.1) );
+  moves.append( mvScale(psi[i], lambda = 1) );
+  i <- i+1
+  }
+# Proportional Taxon Sampling of Youngest Time Slice
+rho <- 0;	# 'extant' sampling.
+
+# Establish Basal Divergence Time
+origin_time ~ dnUnif(520, 570);
+moves.append(mvSlide(origin_time, delta=0.01, weight=5));
+moves.append(mvSlide(origin_time, delta=0.10, weight=3));
+moves.append(mvSlide(origin_time, delta=1.00, weight=1));
+
