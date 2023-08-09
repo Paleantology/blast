@@ -1,25 +1,25 @@
-taxon,max_age,min_age
-Amygdalocystites_florealis,5.65,4.85
-Amygdalocystites_radiatus,3.8 ,2.55
-Bistomiacystis_globosa,5.65,4.85
-Bistomiacystis_schrantzi,3.8 ,2.55
-Canadocystis_tennesseensis,10.75 ,6.85
-Canadocystis_emmonsi ,10.75 ,8.75
-Columbocystis_typica,6.45 ,4.85
-Columbocystis_ovata ,6.45 ,4.85
-Comarocystites_punctatus,6.45,2.55
-Comarocystites_tribrachius,3.8 ,2.55
-Globulocystites_cristatus,5.65,4.85
-Globulocystites_rotundatus,6.85 ,5.65
-Implicaticystis_shumardi,1.8 ,0.8
-Implicaticystis_symmetricus,1.8 ,0.8
-Malocystites_murchisoni,10.75 ,8.75
-Oklahomacystis_spissus,5.65 ,4.85
-Oklahomacystis_tribrachiatus,5.65,4.85
-Oklahomacystis_bibrachiatus,5.65,4.85
-Oklahomacystis_trigonis,5.65 ,3.8
-Platycystites_faberi,6.85,5.65
-Globulocystites_infundus,5.65,4.85
-Sinclairocystis_praedicta,5.65,4.85
-Wellerocystis_kimmswickensis,2.4,0.85
-Cheirocystis_fultonensis,31.95,0
+taxon	max_age	min_age
+Amygdalocystites_florealis	456.00	455.20
+Amygdalocystites_radiatus	454.15	452.90
+Bistomiacystis_globosa	456.00	455.20
+Bistomiacystis_schrantzi	454.15	452.90
+Canadocystis_tennesseensis	461.10	457.20
+Canadocystis_emmonsi	461.10	459.10
+Columbocystis_typica	456.80	455.20
+Columbocystis_ovata	456.80	455.20
+Comarocystites_punctatus	456.80	452.90
+Comarocystites_tribrachius	454.15	452.90
+Globulocystites_cristatus	456.00	455.20
+Globulocystites_rotundatus	457.20	456.00
+Implicaticystis_shumardi	452.75	451.20
+Implicaticystis_symmetricus	452.75	451.20
+Malocystites_murchisoni	461.10	459.10
+Oklahomacystis_spissus	456.00	455.20
+Oklahomacystis_tribrachiatus	456.00	455.20
+Oklahomacystis_bibrachiatus	456.00	455.20
+Oklahomacystis_trigonis	456.00	454.15
+Platycystites_faberi	457.20	456.00
+Globulocystites_infundus	456.00	455.20
+Sinclairocystis_praedicta	456.00	455.20
+Wellerocystis_kimmswickensis	452.75	451.20
+Cheirocystis_fultonensis	483.10	451.15
