@@ -10,18 +10,26 @@ monitors = VectorMonitors()
 
  num_branches <- 2 * n_taxa - 2
 
-timeline <- v(520); 
-timeline1 <- v(264.28, 359.3, 443.8);  # Shift at each substage
-timeline2 <- v(90.70, 102.50, 174.45, 176.60);  # Two punctuation
-timeline3 <- v(174.45, 176.60);  # One punctuation
-timeline4 <- v(443.8, 445.2 );  # One shift
+timeline <- v(520);
+# Shifts after Mass Extinctions
+timeline1 <- v(359.3, 443.1);  # Shifts after Devonian & Ordovician
+# Shifts after Mass Extinctions & Separate Mass Extinction Interval Rates
+timeline2 <- v(359.3, 371.1, 443.05, 445.2);  # Shifts after Devonian, during Famennian (latest Devonian), after Ordovician, during Hirnantian (latest Ordovician)
+# Shifts after End-Ordovician and during latest Ordovician
+timeline3 <- v(443.05, 445.2);  # Shift after Ordovician, & during Hirnantian
+# This looks redundant: I don't remember why we'd separate the middle Hirnantian?
+timeline4 <- v(443.8, 445.2 );  # Shift in middle of Hirnantian & onset of Hirnantian: Ditch?
+# Shifts after each Period
+timeline5a <- v(298.9, 359.3, 419.0, 443.05,486.85, 520)  # Shift after each period (Cambrian, Ordovician, Silurian, Devonian, Carboniferous; Permian excluded because we do not have Triassic blastoids)
+# Shifts after each Period, but skipping Cambrian shift because we don't have any Cambrian ingroup taxa; we might use this instead for 5a
+timeline5b <- v(298.9, 359.3, 419.0, 443.05, 520)  # Shift after each relevant period (Ordovician, Silurian, Devonian, Carboniferous; Permian excluded again; Cm-O boundary excluded because we barely have any Cambrian taxa & those are outgroups)
+ timeline6 <- v(426.75, 432.95, 432.95, 443.1,445.2,452.75,458.2,471.25, 477.1, 485.85, 520 );
 
 
-
-fbd_indicator ~ dnCategorical(simplex(1,1,1,1,1));
-fbd_indicator.setValue(3);
+fbd_indicator ~ dnCategorical(simplex(1,1,1,1,1, 1, 1, 1));
+fbd_indicator.setValue(6);
 moves.append( mvRandomGeometricWalk(fbd_indicator, weight=10.0, tune=FALSE) );
-fbd_vec := v(timeline, timeline1, timeline2, timeline3, timeline4);
+fbd_vec := v(timeline, timeline1, timeline2, timeline3, timeline4, timeline5a, timeline5b, timeline6);
 times := fbd_vec[fbd_indicator]
 times.size()
 source("rjMCMC/model_FBD.Rev")

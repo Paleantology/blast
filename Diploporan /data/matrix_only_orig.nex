@@ -1,4 +1,5 @@
 #NEXUS
+[written Tue Jun 20 15:38:41 EDT 2023 by Mesquite  version 3.70 (build 940) at Sarahs-MacBook-Air-69.local/10.224.248.172]
 
 BEGIN DATA;
 	DIMENSIONS  NTAX=28 NCHAR=61;
@@ -15,7 +16,7 @@ BEGIN DATA;
 	Gomphocystites_indianensis      010?-001001000-0---000000000100???000000011010000--00010-00--
 	Eucystis_angelini               0100-101001000-0---100000100010???0010???101010001-00000-00--
 	Sphaeronites_rossicum           0100-10100?000-0---1000??0?001001?0000??0000010000-00000-00--
-	Haplosphaeronis_oblonga         0100-101001002-0---00000010001001100?0??1001010000-00000-00--
+	Haplosphaeronites_oblonga       0100-101001002-0---00000010001001100?0??1001010000-00000-00--
 	Eumorphocystis_multiporata      0113110100010001001--00111010010000000???000--112-100100100--
 	Glyptosphaerites_leuchtenbergi  0100?10100?000-??????0000000?11010000001112110000--00000-00--
 	Estonocystis_antropoffi         0104010100100111?01--0000000101000000000?120--000-100100200--
@@ -34,4 +35,5 @@ BEGIN DATA;
 	Canadocystis_barrandei          010101???------1?01--0000??0-1??000001???11?--000-101000100--
 
 ;
+
 END;

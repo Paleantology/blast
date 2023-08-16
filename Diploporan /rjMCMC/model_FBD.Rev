@@ -23,7 +23,7 @@ for (i in 1:(times.size()+1))  {
 rho <- 0;	# 'extant' sampling.
 
 # Establish Basal Divergence Time
-origin_time ~ dnUnif(520, 570);
+origin_time ~ dnUnif(480, 520);
 moves.append(mvSlide(origin_time, delta=0.01, weight=5));
 moves.append(mvSlide(origin_time, delta=0.10, weight=3));
 moves.append(mvSlide(origin_time, delta=1.00, weight=1));
