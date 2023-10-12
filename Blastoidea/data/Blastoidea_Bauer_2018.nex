@@ -5,7 +5,7 @@ BEGIN TAXA;
 	TITLE Taxa;
 	DIMENSIONS NTAX=57;
 	TAXLABELS
-		Ambolostoma_baileyi_ Angioblastus_boliviensis Angioblastus_dotti Asterocrinus_benniei Brachyschisma_corrugatum Cryptoblastus_melo Codaster_acutus Cribroblastus_cornutus Cryptoschisma_schulzii_ Diploblastus_glaber Decaschisma_pulchellus Decemboblastus_melonoides Deliablastus_cumberlandensis Deltoblastus_permicus Deltoblastus_batheri_ Devonoblastus_whiteavesi Eleutherocrinus_cassadayi Elaeacrinus_verneuili Ellipticoblastus_ellipticus Granatocrinus_granulatus Globoblastus_norwoodi Hadroblastus_convexus Heteroschisma_alternatus Hydroblastus_herdyi Hyperoblastus_goldringae Iranoblastus_nodosus Lophoblastus_neglectus Leptoschisma_lorae Mesoblastus_crenulatus Metablastus_wortheni Monadoblastus_granulosus Monoschizoblastus_rofei_ Nucleocrinus_elegans Notoblastus_brevispinus Orbiblastus_hoskyni Orophocrinus_stelliformis Pentremitidea_paillettei Perittoblastus_liratus Phaenoblastus_caryophyllatus Placoblastus_obovatus Pleuroschisma_lycorias Polydeltoideus_enodatus Poroblastus_granulosus Pterotoblastus_gracilis Pentremites_godoni Pentremites_pulchellus Pinguiblastus_tushanensis Sagittoblastus_wanneri Schizoblastus_sayi Sinopetaloblastus_jinxingae Tanaoblastus_roemeri Timoroblastus_coronatus_constrictus Tricoelocrinus_woodmani Troosticrinus_reinwardti Stephanocrinus_angulatus Cupulocorona_gemmiformis Cheirocystis_fultonensis 
+		Ambolostoma_baileyi Angioblastus_boliviensis Angioblastus_dotti Asterocrinus_benniei Brachyschisma_corrugatum Cryptoblastus_melo Codaster_acutus Cribroblastus_cornutus Cryptoschisma_schulzii Diploblastus_glaber Decaschisma_pulchellus Decemboblastus_melonoides Deliablastus_cumberlandensis Deltoblastus_permicus Deltoblastus_batheri Devonoblastus_whiteavesi Eleutherocrinus_cassadayi Elaeacrinus_verneuili Ellipticoblastus_ellipticus Granatocrinus_granulatus Globoblastus_norwoodi Hadroblastus_convexus Heteroschisma_alternatus Hydroblastus_herdyi Hyperoblastus_goldringae Iranoblastus_nodosus Lophoblastus_neglectus Leptoschisma_lorae Mesoblastus_crenulatus Metablastus_wortheni Monadoblastus_granulosus Monoschizoblastus_rofei Nucleocrinus_elegans Notoblastus_brevispinus Orbiblastus_hoskyni Orophocrinus_stelliformis Pentremitidea_paillettei Perittoblastus_liratus Phaenoblastus_caryophyllatus Placoblastus_obovatus Pleuroschisma_lycorias Polydeltoideus_enodatus Poroblastus_granulosus Pterotoblastus_gracilis Pentremites_godoni Pentremites_pulchellus Pinguiblastus_tushanensis Sagittoblastus_wanneri Schizoblastus_sayi Sinopetaloblastus_jinxingae Tanaoblastus_roemeri Timoroblastus_coronatus_constrictus Tricoelocrinus_woodmani Troosticrinus_reinwardti Stephanocrinus_angulatus Cupulocorona_gemmiformis Cheirocystis_fultonensis
 	;
 
 END;
@@ -15,7 +15,7 @@ BEGIN CHARACTERS;
 	TITLE  Character_Matrix;
 	DIMENSIONS  NCHAR=80;
 	FORMAT DATATYPE = STANDARD RESPECTCASE GAP = - MISSING = ? SYMBOLS = "  0 1 2 3 4 5 6 7 8 9 A B C D E F G H J K M N P Q R S T U V W X Y Z a b c d e f g h j k m n p q r s t u v w x y";
-	CHARSTATELABELS 
+	CHARSTATELABELS
 		1 PPCP_sutured_to_theca /  Absent Present,
 		2 PPCP_size_&_differentiation /  Small_&_Undifferentiated Large_&_Differentiated,
 		3 PPCP_arrangement_on_oral_surface /  'Plates are flat/flush with surface' Places_are_elevated_above_summit_surface,
@@ -23,21 +23,21 @@ BEGIN CHARACTERS;
 		5 Proximal_amb_length /  Short_and_restricted_adorally 'Elongate, thin extension ',
 		6 Main_food_groove_placement /  'Oral-oral suture to Floor plates' 'O-O to Lancet' 'O-O to Lancet & FP',
 		7 Ambulacral_outline /  Parallel_sided Lanceolate Oblanceolate Rhombiform,
-		8 'Shape of ambulacra, proximal to distal in lateral view' /  Straight_ Convex,
+		8 'Shape of ambulacra, proximal to distal in lateral view' /  Straight  Convex,
 		9 'Abaxial surface of ambulacra, perpendicular to primary body axis ' /  Flat Concave Convex,
 		10 Interambulacral_shape_in_summit_view /  Flat Concave Convex,
 		11 Ambulacral_position_with_respect_to_surrounding_thecal_plates /  Below 'In-line' Above,
 		12 Reduced_D_ambulacrum /  Absent Present,
 		13 Ambulacra_recumbent /  Absent Present,
-		14 Lateral_food_grooves_curve /  Straight Adorally_ Aborally,
+		14 Lateral_food_grooves_curve /  Straight Adorally  Aborally,
 		15 Ratio_of_plates_surrounding_the_ambulacra /  'Radial > Oral ' 'Radial = Oral ' 'Radial < Oral ',
 		16 Lancet_shape /  'Button, circular' 'Restricted, elongate' Extends_for_entire_amb,
-		17 Lancet_interaction_with_ambulacral_floor_plates /  Floor_plates_overlab_lancet_completely_ Partial_exposure_of_lancet Lancet_exposed_for_length_of_ambulacra,
+		17 Lancet_interaction_with_ambulacral_floor_plates /  Floor_plates_overlab_lancet_completely  Partial_exposure_of_lancet Lancet_exposed_for_length_of_ambulacra,
 		18 Lancet_plate_is_a_facetal_plate /  Absent Present,
 		19 Oral_and_radial_plate_overlap /  Oral_plates_overlap_radial_plates Oral_plates_abut_radial_plates radial_plates_overlap_oral_pltes,
 		20 Relative_size_comparison_of_oral_and_radial_plates /  Oral_plates_are_larger_than_radial_plates Oral_plates_are_approximately_equal_in_size_to_radial_plates Oral_plates_are_smaller_than_radial_plates,
 		21 Oral_and_radial_suture_shape /  Flat 'V-shaped' Lobate,
-		22 Oral_plate_body_ /  Absent Present,
+		22 Oral_plate_body  /  Absent Present,
 		23 Oral_plate_crest /  Absent Present,
 		24 Oral_plate_septum /  Absent Present,
 		25 Oral_plate_growth_lines /  'Straight-fine growth lines' 'Straight-coarse growth lines' Wavy_growth_lines,
@@ -64,7 +64,7 @@ BEGIN CHARACTERS;
 		46 Secondary_thickening_around_stem_facet /  Absent Present,
 		47 'Basal-radial plate suture' /  Flat Recessed,
 		48 'Basal-radial relative size ' /  'B>R' 'B=R' 'B<R',
-		49 Basal_circlet_orientation /  Flat 'Invaginated/concave' In_line_with_thecal_plates_ Small_angle Large_angle,
+		49 Basal_circlet_orientation /  Flat 'Invaginated/concave' In_line_with_thecal_plates  Small_angle Large_angle,
 		50 'Basal plate ornamentation, surface modification' /  None_present Nodes_in_linear_arrays 'Nodes in random orientation, no clear pattern ',
 		51 Distal_basal_shape_from_basal_view /  Circular Triangular Pentagonal,
 		52 Endothecal_respiratory_structures /  Absent Present,
@@ -87,7 +87,7 @@ BEGIN CHARACTERS;
 		69 Number_of_hydrospire_slits_per_field /  '1-3' '4-6' '7+',
 		70 Number_of_hydrospire_folds_per_field /  1 '2-3' '3+',
 		71 Change_in_hydrospire_folds_per_field_depending_on_location_in_theca /  Absent Present,
-		72 Anal_area_hydrospires_differ_from_other_fields /  No_hydrospires_ No_difference Reduction_of_hydrospires,
+		72 Anal_area_hydrospires_differ_from_other_fields /  No_hydrospires  No_difference Reduction_of_hydrospires,
 		73 Hydrospire_occupation_of_thecal_space /  Little Moderate Full,
 		74 Hydrospire_cleft_enlargement /  Absent Present,
 		75 Hydrospire_fold_to_spiracle_transitions_through_theca /  No_shifts 1_shift 2_or_more_shifts_,
@@ -95,9 +95,9 @@ BEGIN CHARACTERS;
 		77 Stem_sutured_to_basals /  Absent Present,
 		78 Columnal_type /  Heteromorphic Homeomorphic,
 		79 Widest_part_of_theca /  Summit Middle Base,
-		80 Ridges_that_extend_from_ambulacral_sinus_across_radials_and_basal /  Absent Present ; 
+		80 Ridges_that_extend_from_ambulacral_sinus_across_radials_and_basal /  Absent Present ;
 	MATRIX
-	Ambolostoma_baileyi_                 ???1012(0 1)22001(0 1)122021111??0101111??2(0 1)0?000100???????1?200202013010?????????????10
+	Ambolostoma_baileyi                  ???1012(0 1)22001(0 1)122021111??0101111??2(0 1)0?000100???????1?200202013010?????????????10
 	Angioblastus_boliviensis             ???010112210111200?21100?01011??0?001?1002000?122?01?011000??????0021?????????10
 	Angioblastus_dotti                   ???010100210112200021100?01011??0?001?1002000?122?01???1000???????????????????10
 	Asterocrinus_benniei                 ???0(0 1)0212201110200?21111?00011????00??200100??0222?1?0?10?11?3?????????0??????00
@@ -105,13 +105,13 @@ BEGIN CHARACTERS;
 	Cryptoblastus_melo                   ???100002100110210221111?000111020210?100010001210?1?200202113001????10100100?10
 	Codaster_acutus                      ???010210010111200?21111??0011?00??00??0020?0?022?11?001000??????0022?????????00
 	Cribroblastus_cornutus               ???100002100110200221111?0101111??00?000010????20??1?2002021130?0?????????????10
-	Cryptoschisma_schulzii_              ???211310110110220121111??00???00?201000010000022?01?0011010?3?????0?21021211?00
+	Cryptoschisma_schulzii               ???211310110110220121111??00???00?201000010000022?01?0011010?3?????0?21021211?00
 	Diploblastus_glaber                  ???100002(1 2)1011020022(1 2)11102001111201?10000100000?3001?200202(0 1)0(0 1)010????10110100?10
 	Decaschisma_pulchellus               ???0000(0 1)(0 2)000110200?2(0 1)111?0(0 1)011(0 1)0111010000100000220(0 1)1?2(0 1)10010(0 1)1???0(0 2)(0 2)(1 2)???????0?00
 	Decemboblastus_melonoides            ???10000222011?20002111100101111???01020??0????????1?200202103010???????????1?10
 	Deliablastus_cumberlandensis         ???1000022101102002211????00???111110?1000?????20??1???0202???010?????????????10
 	Deltoblastus_permicus                11110111210011222020(1 2)111?01011110?0(0 1)0?000110??021?01?200202?00000????1020010??20
-	Deltoblastus_batheri_                111101112100112210201111?01011110?000?000110??021?01??00202?0?000?????????????20
+	Deltoblastus_batheri                 111101112100112210201111?01011110?000?000110??021?01??00202?0?000?????????????20
 	Devonoblastus_whiteavesi             ???1020020201102002011?10000111?20201000010?0?024?11?200202010010?????????????10
 	Eleutherocrinus_cassadayi            ???100002211110200221111?0001110202010000100000?3011?200202012010???????????0?10
 	Elaeacrinus_verneuili                11010000221011220000211120(0 1)01111221112000(0 1)10000(1 2)1?01?2002021(0 1)(0 3)010???????????0?(0 1)0
@@ -128,7 +128,7 @@ BEGIN CHARACTERS;
 	Mesoblastus_crenulatus               ???100002(0 2)(1 2)0110200222111010011??20?0101001(0 1)000(0 1)20?01?200202113002???????????0?20
 	Metablastus_wortheni                 ???000000(0 1)00110200221111??10111021101000010000020011120121110(1 3)010???????????0?11
 	Monadoblastus_granulosus             ???1010021201?0200222111010?111?0?0110110010???2???1??00202???0?0?????????????10
-	Monoschizoblastus_rofei_             ???100002010112200001111?10011110?010?10001000?21?01?2002?2113010????0010000??10
+	Monoschizoblastus_rofei              ???100002010112200001111?10011110?010?10001000?21?01?2002?2113010????0010000??10
 	Nucleocrinus_elegans                 11010000221011220000211120001110221112000110?0021001?200202103010?????????????10
 	Notoblastus_brevispinus              ???0101102201112?0?2?111??0011100?0?0??1010?0?020?01?2?1000?????????????????0?00
 	Orbiblastus_hoskyni                  ???10000221011020021111100001110??001010001???021?01?200202103010?????????????10
@@ -467,5 +467,3 @@ Begin MESQUITE;
 		endTell;
 		endTell;
 end;
-
-
